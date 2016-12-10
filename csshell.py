@@ -16,6 +16,7 @@ class csshell:
 			'/bin/ls':True,
 			'/bin/kill':True,
 			'/sbin/dhclient':True,
+			'/usr/sbin/tunctl':True,
 		}
 		try:
 			return allowed_bins[bin]

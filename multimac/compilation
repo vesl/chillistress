@@ -1,1 +1,0 @@
-gcc -pthread -g -O -Wall -I.. -D_REENTRANT multimac.c -o multimac_compiled

@@ -2,6 +2,7 @@
 import http.client
 import err
 import random
+import btools
 
 class cshttp:
 
@@ -45,12 +46,6 @@ class cshttp:
 			err.warn('cshttp_method','{}'.format(method))
 			return False
 
-	def decode(self,s):
-		try : 
-			return s.decode('utf-8')
-		except:
-			return s
-
 #Request can get and post
 	def request(self,method,url,s_addr):
 		self.raw_url=url
@@ -69,7 +64,7 @@ class cshttp:
 		if res.status == 302 : 
 			self.sock.close()
 			self.request(method,res.getheader('Location'),s_addr)
-		return self.decode(res.read())
+		return btools.tryutf8(res.read())
 
 	def get(self,url,s_addr):
 		return self.request('GET',url,s_addr)

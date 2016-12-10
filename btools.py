@@ -2,5 +2,5 @@
 def tryutf8(s):
 	try:
 		return s.decode('utf-8')		
-	except AttributeError:
+	except :
 		return s

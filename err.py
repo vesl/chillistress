@@ -18,17 +18,10 @@ def join(code):
 		'cshttp_request':"Can't request",
 		'csshell_bad_bin':"That bin is not allowed",
 		'csshell_kill_not_found':"Can't find process",
-		'csnetwork_bad_network':"This is not a valid network. Should be xxx.xxx.xxx.xxx/xx",
-		'csnetwork_assign_ip':"Can't assign ip on nic",
 		'cstaps_too_much_taps':"Calm down, there is too much taps",
 		'cstaps_create':"Can't create tap",
 		'cstaps_clean':"Can't clean tap",
-		'cstaps_create_br':"Can't create bridge",
 		'cstaps_bind':"Cant bind tap to br",
 		'cstaps_up':"Cant up tap",
-		'cstaps_number_ip':"Not same lenght ip and taps",
-		'cstaps_set_ip':"Can't set ip on tap",
-		'csip_bad_network':"Can't deal with this network",
-		'csip_ipstart_not_found':"Can't found ipstart",
 	}
 	return err[code]

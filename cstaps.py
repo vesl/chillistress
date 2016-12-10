@@ -1,7 +1,6 @@
 #!/usr/bin/python
 
 import csshell
-import csip
 import err
 import time
 

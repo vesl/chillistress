@@ -6,13 +6,11 @@ import btools
 
 class cshttp:
 
-#Make http connection from http.client
 	def connect(self,s_addr,prot):
 		port = random.randrange(10000,60000)
 		if prot == 'http' : self.sock=http.client.HTTPConnection(self.params['host'],self.params['port'],source_address=(self.params['s_addr'],port))
 		elif prot == 'https' : self.sock=http.client.HTTPSConnection(self.params['host'],self.params['port'],source_address=(self.params['s_addr'],port))
 
-#Check protocol specified in url and provide arguments for following
 	def parse_url(self):
 		host = self.raw_url.split('/')[2]
 		if not host : 
@@ -34,7 +32,7 @@ class cshttp:
 		except KeyError:
 			err.warn('cshttp_protocol','{}'.format(prot))
 			return False
-#Check method used
+
 	def check_method(self,method):
 		methods={
 			'GET':'GET',
@@ -46,7 +44,6 @@ class cshttp:
 			err.warn('cshttp_method','{}'.format(method))
 			return False
 
-#Request can get and post
 	def request(self,method,url,s_addr):
 		self.raw_url=url
 		self.params=self.parse_url()

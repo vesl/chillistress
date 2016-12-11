@@ -15,6 +15,7 @@ class csshell:
 			'/bin/kill':True,
 			'/usr/sbin/tunctl':True,
 			'sh/getMac.sh':True,
+			'sh/getActiveTaps.sh':True,
 		}
 		try:
 			return allowed_bins[bin]
@@ -29,7 +30,7 @@ class csshell:
 		proc=subprocess.Popen(self.cmd,stdout=subprocess.PIPE,stderr=subprocess.PIPE)
 		ret=proc.returncode
 		try:
-			(out,error)=proc.communicate(timeout=3)
+			(out,error)=proc.communicate(timeout=20)
 		except subprocess.TimeoutExpired:
 			error='Timeout: {}'.format(self.cmd)
 			out = error

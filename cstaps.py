@@ -18,6 +18,9 @@ class cstaps:
 	def gettaps(self):
 		return self.taps
 
+	def getactivetaps(self):
+		return int(self.csshell.sh('sh/getActiveTaps.sh')['out'])
+
 	def create(self):
 		for tap in self.taps:
 			create=self.csshell.sh('/usr/sbin/tunctl -u root -t {}'.format(tap['name']))
@@ -41,10 +44,12 @@ class cstaps:
 		return True
 
 	def getmac(self):
-		for tap in self.taps:
-			mac = self.csshell.sh('sh/getMac.sh {}'.format(tap['name']))
-			if mac['err'] : err.crit('cstaps_mac','Tap : {} Err : {}'.format(tap['name'],mac['err']))
-			else : tap.update({'mac':mac['out'][:-1]})
+		self.taps=[]
+		macs = self.csshell.sh('sh/getMac.sh')
+		if macs['err'] : err.crit('cstaps_mac',macs['err'])
+		macs = macs['out'].split(' ')
+		for i in range(len(macs)):
+			if macs[i][0:3] == 'tap': self.taps.append({'name':macs[i],'mac':macs[i+4]})
 		return True
 
 	def setip(self):

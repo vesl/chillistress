@@ -2,11 +2,11 @@
 import cstaps
 import sys
 
-cstaps=cstaps.cstaps(50,'br0')
-cstaps.clean()
-cstaps.create()
-cstaps.bind()
-cstaps.uptaps()
+cstaps=cstaps.cstaps(10000,'br0')
+#cstaps.clean()
+#cstaps.create()
+#cstaps.bind()
+#cstaps.uptaps()
 cstaps.getmac()
 cstaps.setip()
 

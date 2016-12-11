@@ -8,15 +8,13 @@ import btools
 class csshell:
 	def check_bin(self,bin):
 		allowed_bins={
-			'multimac/create.sh':True,
 			'/sbin/ip':True,
 			'/sbin/ifconfig':True,
 			'/sbin/brctl':True,
 			'/bin/ps':True,
-			'/bin/ls':True,
 			'/bin/kill':True,
-			'/sbin/dhclient':True,
 			'/usr/sbin/tunctl':True,
+			'sh/getMac.sh':True,
 		}
 		try:
 			return allowed_bins[bin]

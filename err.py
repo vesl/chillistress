@@ -21,6 +21,7 @@ def join(code):
 		'cstaps_too_much_taps':"Calm down, there is too much taps",
 		'cstaps_create':"Can't create tap",
 		'cstaps_clean':"Can't clean tap",
+		'cstaps_mac':"Can't get mac of tap",
 		'cstaps_bind':"Cant bind tap to br",
 		'cstaps_up':"Cant up tap",
 	}

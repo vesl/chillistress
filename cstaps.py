@@ -14,6 +14,8 @@ class cstaps:
 		while number > 0:
 			self.taps.append({'name':'tap{}'.format(number)})
 			number-=1
+	def gettaps(self):
+		return self.taps
 
 	def create(self):
 		for tap in self.taps:
@@ -34,7 +36,14 @@ class cstaps:
 	def uptaps(self):
 		for tap in self.taps:
 			up = self.csshell.sh('/sbin/ifconfig {} up'.format(tap['name']))
-			if up['err'] : err.warn('cstaps_up',tap)
+			if up['err'] : err.warn('cstaps_up','Tap : {} Err : {}'.format(tap['name'],up['err']))
+		return True
+
+	def getmac(self):
+		for tap in self.taps:
+			mac = self.csshell.sh('sh/getMac.sh {}'.format(tap['name']))
+			if mac['err'] : err.crit('cstaps_mac','Tap : {} Err : {}'.format(tap['name'],mac['err']))
+			else : tap.update({'mac':mac['out'][:-1]})
 		return True
 
 	def setip(self):

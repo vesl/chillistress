@@ -8,7 +8,7 @@ cstaps.create()
 cstaps.bind()
 cstaps.uptaps()
 cstaps.getmac()
-print(cstaps.gettaps())
+cstaps.setip()
 
 #import cshttp
 #cshttp=cshttp.cshttp()

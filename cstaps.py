@@ -1,6 +1,7 @@
 #!/usr/bin/python
 
 import csshell
+import csdhcp
 import err
 import time
 
@@ -47,6 +48,10 @@ class cstaps:
 		return True
 
 	def setip(self):
+		for tap in self.taps:
+			dhcp=csdhcp.csdhcp(tap['mac'])
+			ip=dhcp.request()
+			print(ip)
 		return True
 
 	def clean(self):

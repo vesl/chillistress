@@ -51,7 +51,10 @@ class cstaps:
 		for tap in self.taps:
 			dhcp=csdhcp.csdhcp(tap['mac'])
 			ip=dhcp.request()
-			print(ip)
+			tap.update({'ip':ip})
+			assign = self.csshell.sh('/sbin/ip addr add {}/32 dev {}'.format(tap['ip'],tap['name']))
+			err.log('Set ip {} to dev {}'.format(tap['ip'],tap['name']))
+			if assign['err'] : err.crit('cstaps_ip_assign','Tap : {} IP : {}'.format(tap['name'],tap['ip']))
 		return True
 
 	def clean(self):

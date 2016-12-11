@@ -44,4 +44,18 @@ class csdhcp:
 		except Exception as e:
 			err.crit('csdhcp_bind',e)
 		dhcp_sock.sendto(self.packet(),('255.255.255.255',67))
-		return True
+		try :
+			while True:
+				data=dhcp_sock.recv(1024)
+				offer=self.parse_res(data)
+				if offer :
+					return offer 
+					break
+		except socket.timeout:
+			err.warn('csdhcp_timeout','timeout')
+
+	def parse_res(self,data):
+		if data[4:8] == self.transaction_id :
+			ip = '.'.join(map(lambda x:str(x), data[16:20]))
+			return ip
+		return False

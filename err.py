@@ -25,5 +25,6 @@ def join(code):
 		'cstaps_bind':"Cant bind tap to br",
 		'cstaps_up':"Cant up tap",
 		'csdhcp_bind':"Cant bind sock dhcp port 68",
+		'csdhcp_timeout':"Dhcp didnt offered ip",
 	}
 	return err[code]

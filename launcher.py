@@ -1,10 +1,10 @@
 #!/usr/bin/python
 import cstaps
-import config
+import csconfig
 import sys
 
 
-config=config.get()
+config=csconfig.get()
 
 cstaps=cstaps.cstaps(config['tap-number'],config['bridge-name'])
 cstaps.clean()

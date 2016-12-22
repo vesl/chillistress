@@ -24,6 +24,7 @@ def join(code):
 		'cstaps_mac':"Can't get mac of tap",
 		'cstaps_bind':"Cant bind tap to br",
 		'cstaps_up':"Cant up tap",
+		'cstaps_ip':"Cant assign ip to tap",
 		'csdhcp_bind':"Cant bind sock dhcp port 68",
 		'csdhcp_timeout':"Dhcp didnt offered ip",
 	}

@@ -6,13 +6,13 @@ import sys
 
 config=csconfig.get()
 
-cstaps=cstaps.cstaps(config['tap-number'],config['bridge-name'])
+cstaps=cstaps.cstaps(config['tap-number'],config['bridge'])
 cstaps.clean()
-#cstaps.create()
-#cstaps.bind()
-#cstaps.uptaps()
-#cstaps.getmac()
-#cstaps.setip()
+cstaps.create()
+cstaps.bind()
+cstaps.uptaps()
+cstaps.getmac()
+cstaps.setip()
 
 #import cshttp
 #cshttp=cshttp.cshttp()

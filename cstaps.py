@@ -19,8 +19,9 @@ class cstaps:
 		return self.taps
 
 	def getactivetaps(self):
-		taps = self.csshell.sh('sh/getActiveTaps.sh')['out'].split('\n')
-		return taps
+		taps = list(tap for tap in self.csshell.sh('sh/getTaps.sh')['out'].replace('\n','').split(' ') if tap is not '')
+		if len(taps) > 0 : return taps
+		else:return False
 
 	def create(self):
 		for tap in self.taps:
@@ -60,11 +61,13 @@ class cstaps:
 			tap.update({'ip':ip})
 			assign = self.csshell.sh('/sbin/ip addr add {}/32 dev {}'.format(tap['ip'],tap['name']))
 			err.log('Set ip {} to dev {}'.format(tap['ip'],tap['name']))
-			if assign['err'] : err.crit('cstaps_ip_assign','Tap : {} IP : {}'.format(tap['name'],tap['ip']))
+			if assign['err'] : err.crit('cstaps_ip','Tap : {} IP : {}'.format(tap['name'],tap['ip']))
 		return True
 
 	def clean(self):
-		for tap in self.getactivetaps():
+		taps = self.getactivetaps()
+		if not taps : return True
+		for tap in taps:
 			clean = self.csshell.sh('/usr/sbin/tunctl -u root -d {}'.format(tap))
 			if clean['err'] : err.warn('cstaps_clean','Taps : {} Err : {}'.format(tap,clean['err']))
 		return True

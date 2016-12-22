@@ -15,7 +15,7 @@ class csshell:
 			'/bin/kill':True,
 			'/usr/sbin/tunctl':True,
 			'sh/getMac.sh':True,
-			'sh/getGateway.sh':True,
+			'sh/getTaps.sh':True,
 		}
 		try:
 			return allowed_bins[bin]

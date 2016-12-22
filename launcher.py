@@ -7,12 +7,12 @@ import sys
 config=config.get()
 
 cstaps=cstaps.cstaps(config['tap-number'],config['bridge-name'])
-#cstaps.clean()
-cstaps.create()
-cstaps.bind()
-cstaps.uptaps()
-cstaps.getmac()
-cstaps.setip()
+cstaps.clean()
+#cstaps.create()
+#cstaps.bind()
+#cstaps.uptaps()
+#cstaps.getmac()
+#cstaps.setip()
 
 #import cshttp
 #cshttp=cshttp.cshttp()

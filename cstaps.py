@@ -19,7 +19,8 @@ class cstaps:
 		return self.taps
 
 	def getactivetaps(self):
-		return int(self.csshell.sh('sh/getActiveTaps.sh')['out'])
+		taps = self.csshell.sh('sh/getActiveTaps.sh')['out'].split('\n')
+		return taps
 
 	def create(self):
 		for tap in self.taps:
@@ -63,7 +64,7 @@ class cstaps:
 		return True
 
 	def clean(self):
-		for tap in self.taps:
-			clean = self.csshell.sh('/usr/sbin/tunctl -u root -d {}'.format(tap['name']))
-			if clean['err'] : err.warn('cstaps_clean','Taps : {} Err : {}'.format(tap['name'],clean['err']))
+		for tap in self.getactivetaps():
+			clean = self.csshell.sh('/usr/sbin/tunctl -u root -d {}'.format(tap))
+			if clean['err'] : err.warn('cstaps_clean','Taps : {} Err : {}'.format(tap,clean['err']))
 		return True

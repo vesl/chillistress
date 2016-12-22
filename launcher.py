@@ -1,10 +1,18 @@
 #!/usr/bin/python
 import cstaps
+import config
 import sys
 
-cstaps=cstaps.cstaps(1000,'br0')
-cstaps.clean()
-#cstaps.create()cstaps.bind()cstaps.uptaps()cstaps.getmac()cstaps.setip()
+
+config=config.get()
+
+cstaps=cstaps.cstaps(config['tap-number'],config['bridge-name'])
+#cstaps.clean()
+cstaps.create()
+cstaps.bind()
+cstaps.uptaps()
+cstaps.getmac()
+cstaps.setip()
 
 #import cshttp
 #cshttp=cshttp.cshttp()

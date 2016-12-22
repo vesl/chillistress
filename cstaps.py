@@ -49,7 +49,7 @@ class cstaps:
 		self.taps=[]
 		macs = self.csshell.sh('sh/getMac.sh')
 		if macs['err'] : err.crit('cstaps_mac',macs['err'])
-		macs = macs['out'].split(' ')
+		macs = macs['out'].replace('\n','').split(' ')
 		for i in range(len(macs)):
 			if macs[i][0:3] == 'tap': self.taps.append({'name':macs[i],'mac':macs[i+4]})
 		return True

@@ -8,7 +8,11 @@ import err
 
 class csdhcp:
 	def __init__(self,mac):
-		self.mac = bytes.fromhex(mac.replace(':',' '))
+		try:
+			raw = mac.replace(':',' ')
+			self.mac = bytes.fromhex(raw)
+		except ValueError as e:
+			err.crit('csdhcp_mac','Mac: {} ValueError: {}'.format(raw,e))
 		self.transaction_id = self.trans_id()
 
 	def trans_id(self):

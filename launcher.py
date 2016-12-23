@@ -1,20 +1,21 @@
 #!/usr/bin/python
-import cstaps
 import csconfig
+import cstaps
+import cshttp
 import sys
 
 
 config=csconfig.get()
-
 cstaps=cstaps.cstaps(config['tap-number'],config['bridge'])
+cshttp=cshttp.cshttp()
+
 cstaps.clean()
 cstaps.create()
 cstaps.bind()
 cstaps.uptaps()
 cstaps.getmac()
 cstaps.setip()
+taps = cstaps.gettaps()
 
-#import cshttp
-#cshttp=cshttp.cshttp()
-#res=cshttp.request('GET','http://www.google.fr','10.1.0.1')
-#print(res)
+res=cshttp.request('GET','http://www.google.fr','10.1.0.1')
+print(res)

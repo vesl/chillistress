@@ -2,6 +2,7 @@
 import csconfig
 import cstaps
 import cshttp
+import csclient
 import sys
 
 
@@ -17,5 +18,8 @@ cstaps.getmac()
 cstaps.setip()
 taps = cstaps.gettaps()
 
-res=cshttp.request('GET','http://www.google.fr','10.1.0.1')
-print(res)
+
+for tap in taps:
+	csclient=csclient.csclient(tap,config['instance-dns'],config['instance-ip'],config['instance-uamport'],config['instance-ssid'],config['instance-nasid'])
+	r=csclient.pass()
+	print(r)

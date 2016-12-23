@@ -16,6 +16,7 @@ class csshell:
 			'/usr/sbin/tunctl':True,
 			'sh/getMac.sh':True,
 			'sh/getTaps.sh':True,
+			'sh/getMacFromIP.sh':True,
 		}
 		try:
 			return allowed_bins[bin]

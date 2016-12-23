@@ -28,5 +28,6 @@ def join(code):
 		'csdhcp_bind':"Cant bind sock dhcp port 68",
 		'csdhcp_timeout':"Dhcp didnt offered ip",
 		'csdhcp_mac':"Can't deal with that mac",
+		'csclient_mac':"Can't get the mac of the instance",
 	}
 	return err[code]

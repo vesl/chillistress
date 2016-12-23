@@ -13,6 +13,7 @@ class csshell:
 			'/sbin/brctl':True,
 			'/bin/ps':True,
 			'/bin/kill':True,
+			'/bin/ping':True,
 			'/usr/sbin/tunctl':True,
 			'sh/getMac.sh':True,
 			'sh/getTaps.sh':True,

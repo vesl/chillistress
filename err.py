@@ -29,5 +29,6 @@ def join(code):
 		'csdhcp_timeout':"Dhcp didnt offered ip",
 		'csdhcp_mac':"Can't deal with that mac",
 		'csclient_mac':"Can't get the mac of the instance",
+		'csclient_portal':"Can't get or login into chilli captive portal",
 	}
 	return err[code]

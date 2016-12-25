@@ -1,12 +1,16 @@
 #!/usr/bin/python
 import cshttp
 import csshell
+import cshtml
 import err
+import btools
+import urllib.parse
 
 class csclient:
 	def __init__(self,tap,instdns,instip,instuamport,instssid,instnas):
 		self.cshttp=cshttp.cshttp()
 		self.csshell=csshell.csshell()
+		self.cshtml=cshtml.cshtml()
 		self.ip=tap['ip']
 		self.mac=tap['mac']
 		self.instdns=instdns
@@ -15,6 +19,8 @@ class csclient:
 		self.instssid=instssid
 		self.instnas=instnas
 		self.instmac=self.getinstmac()
+		self.challenge=btools.randmd5()
+		self.md=btools.randmd5()
 
 	def getinstmac(self):
 		self.csshell.sh('/bin/ping -c 1 {}'.format(self.instip))
@@ -23,7 +29,28 @@ class csclient:
 		return mac['out'].replace('\n','')
 
 	def chillipass(self):
-		notyet="http://{}/?res=notyet&uamip={}&uamport={}&challenge=2652d8fdbf78c5b0344cb697681b9fe2&called={}&mac={}&ip={}&ssid={}&nasid={}&sessionid=585d4fe600000fb0&ssl=https%3a%2f%2fchilli.vipnetwork.fr%3a4990%2f&userurl=&md=B92FE22AFFB23EF2C135E93AC665B4E8".format(self.instdns,self.instip,self.instuamport,self.instmac,self.mac,self.ip,self.instssid,self.instnas)
+		notyet="http://{}/?res=notyet&uamip={}&uamport={}&challenge={}&called={}&mac={}&ip={}&ssid={}&nasid={}&sessionid=585d4fe600000fb0&ssl=https%3a%2f%2fchilli.vipnetwork.fr%3a4990%2f&userurl=&md={}".format(self.instdns,self.instip,self.instuamport,self.challenge,self.instmac,self.mac,self.ip,self.instssid,self.instnas,self.md)
 		err.log('Call url {}'.format(notyet))
 		req=self.cshttp.get(notyet,self.ip)
-		return req
+		self.cshtml.check='checkIfChilliPortal'
+		self.cshtml.feed(req['data'])
+		if self.cshtml.result is False: err.warn('csclient_portal','Status : {}'.format(req['status']))
+		else:
+			err.log('Catched by portal : {}'.format(self.ip))			
+			err.log(req['data'])
+			params = urllib.parse.urlencode({'@form[type]':self.portaltype,
+							'@form[login]':self.portallogin,
+							'@form[password]':self.portalpassword,
+							'@form[uamip]':self.instip,
+							'@form[uamport]':self.instuamport,
+							'@form[challenge]':self.challenge,
+							'@form[nasid]':self.instnas,
+							'@form[mac]':self.mac,
+							'@form[ip]':self.ip,
+							'@form[md]':self.md,
+							'@form[userurl]':'',
+							'@form[termOfUse]':'true',
+							'@form[lastname]':self.portallastname,
+							'@form[firstname]':self.portalfirstname,
+							'@form[email]':self.portalemail,
+							'@form[submit]':''})

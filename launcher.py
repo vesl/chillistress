@@ -6,8 +6,8 @@ import csclient
 import sys
 
 
-config=csconfig.get()
-cstaps=cstaps.cstaps(config['tap-number'],config['bridge'])
+config=csconfig.load()
+cstaps=cstaps.cstaps(config['system']['tap_number'],config['system']['bridge'])
 
 cstaps.clean()
 cstaps.create()

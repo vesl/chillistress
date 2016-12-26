@@ -7,19 +7,14 @@ import btools
 import urllib.parse
 
 class csclient:
-	def __init__(self,tap,instdns,instip,instuamport,instssid,instnas):
+	def __init__(self,tap,config):
 		self.cshttp=cshttp.cshttp()
 		self.csshell=csshell.csshell()
 		self.cshtml=cshtml.cshtml()
-		self.ip=tap['ip']
-		self.mac=tap['mac']
-		self.instdns=instdns
-		self.instip=instip
-		self.instuamport=instuamport
-		self.instssid=instssid
-		self.instnas=instnas
-		self.instmac=self.getinstmac()
-		self.challenge=btools.randmd5()
+        self.config=config
+        self.config.update({'ip':tap['ip']})
+        self.config.update({'mac':tap['mac']})
+		self.config.update({'challenge':btools.randmd5()})
 		self.md=btools.randmd5()
 
 	def getinstmac(self):
@@ -39,18 +34,18 @@ class csclient:
 			err.log('Catched by portal : {}'.format(self.ip))			
 			err.log(req['data'])
 			params = urllib.parse.urlencode({'@form[type]':self.portaltype,
-							'@form[login]':self.portallogin,
-							'@form[password]':self.portalpassword,
-							'@form[uamip]':self.instip,
-							'@form[uamport]':self.instuamport,
+							'@form[login]':self.config['portlogin'],
+							'@form[password]':self.config['portpassword'],
+							'@form[uamip]':self.config['instup'],
+							'@form[uamport]':self.config['instuamport'],
 							'@form[challenge]':self.challenge,
-							'@form[nasid]':self.instnas,
-							'@form[mac]':self.mac,
-							'@form[ip]':self.ip,
+							'@form[nasid]':self.config['instnas'],
+							'@form[mac]':self.config['mac'],
+							'@form[ip]':self.config['ip'],
 							'@form[md]':self.md,
 							'@form[userurl]':'',
 							'@form[termOfUse]':'true',
-							'@form[lastname]':self.portallastname,
-							'@form[firstname]':self.portalfirstname,
-							'@form[email]':self.portalemail,
+							'@form[lastname]':self.config['portlastname'],
+							'@form[firstname]':self.config['portfirstname'],
+							'@form[email]':self.config['portemail'],
 							'@form[submit]':''})

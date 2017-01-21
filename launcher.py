@@ -7,7 +7,7 @@ import sys
 
 
 config=csconfig.load()
-cstaps=cstaps.cstaps(config['system']['tap_number'],config['system']['bridge'])
+cstaps=cstaps.cstaps(int(config['system']['tap_number']),config['system']['bridge'])
 
 cstaps.clean()
 cstaps.create()

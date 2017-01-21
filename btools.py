@@ -20,3 +20,9 @@ def randmd5():
 	i = rand(0,1000000000000)
 	s = str(i).encode('utf-8')
 	return md5(s)
+
+def mergedicts(*dics):
+    result = {}
+    for dic in dics:
+        result.update(dic)
+    return result

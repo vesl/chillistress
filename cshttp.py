@@ -3,13 +3,12 @@ import http.client
 import err
 import random
 import btools
+import urllib.parse
 
 class cshttp:
 
 	def __init__(self):
-		self.headers={'User-Agent':'Mozilla/5.0 (Linux; U; Android 2.2.2; tr-tr; GM FOX Build/HuaweiU8350) AppleWebKit/533.1 (KHTML, like Gecko) Version/4.0 Mobile Safari/533.1',
-			'Accept-Language':'en-gb;q=0.8, en;q=0.7'	
-			}
+		self.headers={'User-Agent':'Mozilla/5.0 (Linux; U; Android 2.2.2; tr-tr; GM FOX Build/HuaweiU8350) AppleWebKit/533.1 (KHTML, like Gecko) Version/4.0 Mobile Safari/533.1','Accept-Language':'en-gb;q=0.8, en;q=0.7'}
 
 	def connect(self,s_addr,prot):
 		port = random.randrange(10000,60000)
@@ -49,7 +48,7 @@ class cshttp:
 			err.warn('cshttp_method','{}'.format(method))
 			return False
 
-	def request(self,method,url,s_addr):
+	def request(self,method,url,s_addr,data=False):
 		self.raw_url=url
 		self.params=self.parse_url()
 		if not self.params: return False
@@ -58,7 +57,11 @@ class cshttp:
 		self.params['s_addr']=s_addr
 		self.connect(self.params['s_addr'],self.params['prot'])
 		try:
-			self.sock.request(self.params['method'],self.params['url'],headers=self.headers)
+			if not data : self.sock.request(self.params['method'],self.params['url'],headers=self.headers)
+			else : 
+				headers=btools.mergedicts(self.headers,{"Content-type": "application/x-www-form-urlencoded","Accept": "text/plain"})
+				print(headers)
+				self.sock.request(self.params['method'],self.params['url'],urllib.parse.urlencode(data),headers)
 		except Exception as e:
 			err.warn('cshttp_request','Params : {} Err : {}'.format(self.params,e))
 		res = self.sock.getresponse()
@@ -71,5 +74,5 @@ class cshttp:
 	def get(self,url,s_addr):
 		return self.request('GET',url,s_addr)
 
-	def post(self,url,s_addr):
-		return self.request('POST',url,s_addr)
+	def post(self,url,s_addr,data):
+		return self.request('POST',url,s_addr,data)

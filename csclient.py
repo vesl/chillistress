@@ -36,4 +36,7 @@ class csclient:
 			login="http://{}/?res=login&type={}&uamip={}&uamport={}&challenge={}&nasid={}&mac={}&ip={}&md={}&login={}&password={}&lastname={}&firstname={}&email={}&userurl=''&nolayout=no".format(self.config['instance']['domain'],self.config['portal']['type'],self.config['instance']['ip'],self.config['instance']['uamport'],self.config['client']['challenge'],self.config['instance']['nasid'],self.config['client']['mac'],self.config['client']['ip'],self.config['client']['md'],self.config['portal']['login'],self.config['portal']['password'],self.config['portal']['lastname'],self.config['portal']['firstname'],self.config['portal']['email'])
 			err.log('Call url {}'.format(login))
 			req=self.cshttp.get(login,self.config['client']['ip'])
+			req=self.cshttp.get(login,self.config['client']['ip'])
+			err.log(req['data'])
+			req=self.cshttp.get("https://www.google.fr",self.config['client']['ip'])
 			err.log(req['data'])

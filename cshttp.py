@@ -12,7 +12,7 @@ class cshttp:
 
 	def connect(self,s_addr,prot,customPort=False):
 		port = random.randrange(10000,60000)
-		if customPort : self.params['port'] = customPort['port']['port']
+		if customPort != False : self.params['port'] = customPort['port']['port']
 		if prot == 'http' : self.sock=http.client.HTTPConnection(self.params['host'],self.params['port'],source_address=(self.params['s_addr'],port))
 		elif prot == 'https' : self.sock=http.client.HTTPSConnection(self.params['host'],self.params['port'],source_address=(self.params['s_addr'],port))
 

@@ -25,7 +25,10 @@ class csclient:
 		return mac['out'].replace('\n','')
 
 	def chillipass(self):
-		notyet="http://{}/?res={}&uamip={}&uamport={}&challenge={}&called={}&mac={}&ip={}&ssid={}&nasid={}&sessionid=585d4fe600000fb0&ssl=https%3a%2f%2fchilli.vipnetwork.fr%3a4990%2f&userurl=&md={}".format(self.config['instance']['domain'],"notyet",self.config['instance']['ip'],self.config['instance']['uamport'],self.config['client']['challenge'],self.config['instance']['mac'],self.config['client']['mac'],self.config['client']['ip'],self.config['instance']['ssid'],self.config['instance']['nasid'],self.config['client']['md'])
+		init = "http://gratuit.vipnetwork.fr"
+		req=self.cshttp.get(init,self.config['client']['ip'],port=3990)
+
+		notyet="http://{}/?res=notyet&uamip={}&uamport={}&challenge={}&called={}&mac={}&ip={}&ssid={}&nasid={}&sessionid=585d4fe600000fb0&ssl=https%3a%2f%2fchilli.vipnetwork.fr%3a4990%2f&userurl=&md={}".format(self.config['instance']['domain'],self.config['instance']['ip'],self.config['instance']['uamport'],self.config['client']['challenge'],self.config['instance']['mac'],self.config['client']['mac'],self.config['client']['ip'],self.config['instance']['ssid'],self.config['instance']['nasid'],self.config['client']['md'])
 		err.log('Call url {}'.format(notyet))
 		req=self.cshttp.get(notyet,self.config['client']['ip'])
 		self.cshtml.check='checkIfChilliPortal'
@@ -36,7 +39,4 @@ class csclient:
 			login="http://{}/?res=login&type={}&uamip={}&uamport={}&challenge={}&nasid={}&mac={}&ip={}&md={}&login={}&password={}&lastname={}&firstname={}&email={}&userurl=''&nolayout=no".format(self.config['instance']['domain'],self.config['portal']['type'],self.config['instance']['ip'],self.config['instance']['uamport'],self.config['client']['challenge'],self.config['instance']['nasid'],self.config['client']['mac'],self.config['client']['ip'],self.config['client']['md'],self.config['portal']['login'],self.config['portal']['password'],self.config['portal']['lastname'],self.config['portal']['firstname'],self.config['portal']['email'])
 			err.log('Call url {}'.format(login))
 			req=self.cshttp.get(login,self.config['client']['ip'])
-			req=self.cshttp.get(login,self.config['client']['ip'])
-			err.log(req['data'])
-			req=self.cshttp.get("https://www.google.fr",self.config['client']['ip'])
 			err.log(req['data'])

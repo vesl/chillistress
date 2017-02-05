@@ -19,5 +19,5 @@ taps = cstaps.gettaps()
 
 
 for tap in taps:
-	csclient=csclient.csclient(tap,config)
-	portal = csclient.chillipass()
+	client=csclient.csclient(tap,config)
+	portal = client.chillipass()

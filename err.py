@@ -29,7 +29,7 @@ def join(code):
 		'csdhcp_timeout':"Dhcp didnt offered ip",
 		'csdhcp_mac':"Can't deal with that mac",
 		'csclient_mac':"Can't get the mac of the instance",
-		'csclient_portal':"Can't get or login into chilli captive portal",
+		'csclient_notyet':"Can't get notyet url",
 		'csconfig_load':"Can't load file config.ini",
 		'csconfig_missing':"Missing some settings in config.ini",
 	}

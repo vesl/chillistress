@@ -56,7 +56,7 @@ class cshttp:
 		self.params['method']=self.check_method(method)
 		if not self.params['method']: return False
 		self.params['s_addr']=s_addr
-		if not port : port = False
+		if not port['port'] : port = False
 		self.connect(self.params['s_addr'],self.params['prot'],port)
 		try:
 			if not data : self.sock.request(self.params['method'],self.params['url'],headers=self.headers)

@@ -51,7 +51,6 @@ class csclient:
 			self.userurl=params[11].split('=')[1]
 			self.md=params[12].split('=')[1]
 
-			notyet=notyet.replace('10.1.0.254',self.config['client']['ip']).replace('52-54-00-32-06-D3',self.config['client']['mac'])
 			req=self.cshttp.get(notyet,self.config['client']['ip'])
 			err.log('Call notyet {}'.format(notyet))
 			

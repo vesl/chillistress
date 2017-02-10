@@ -30,6 +30,8 @@ def join(code):
 		'csdhcp_mac':"Can't deal with that mac",
 		'csclient_mac':"Can't get the mac of the instance",
 		'csclient_notyet':"Can't get notyet url",
+		'csclient_logon':"Can't logon that client",
+		'csclient_urllist_bad':"Remove that url from the list",
 		'csconfig_load':"Can't load file config.ini",
 		'csconfig_missing':"Missing some settings in config.ini",
 	}

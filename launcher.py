@@ -17,7 +17,7 @@ cstaps.getmac()
 cstaps.setip()
 taps = cstaps.gettaps()
 
-
 for tap in taps:
 	client=csclient.csclient(tap,config)
 	portal = client.chillipass()
+	client.getrandomurl()
